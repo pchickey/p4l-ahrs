@@ -1,0 +1,16 @@
+st_LSM303_reader
+----------------
+
+This is a program for the Arduino which reads LMS303DLH 3-axis magnetometer and accellerometer, made by ST Micro.
+
+It sends the read values over the serial port with the following NMEA style format:
+$<sensor>,<axis>,<value>\r\n
+using the following symbols:
+$[A|M],[X|Y|Z],[0-9]+\r\n
+
+For example:
+$A,X,484
+$M,Y,399
+
+All code by Pat Hickey - pat@moreproductive.org
+This is released under a BSD license, but if you find it useful or have problems I'd like to hear from you!
