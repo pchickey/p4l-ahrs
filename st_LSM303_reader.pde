@@ -177,20 +177,20 @@ void accReadAndConvert(void)
 
 void accSend (void)
 {
-  Serial.print("$AX,");
+  Serial.print("$A,X,");
   Serial.println(acc_x);
-  Serial.print("$AY,");
+  Serial.print("$A,Y,");
   Serial.println(acc_y);
-  Serial.print("$AZ,");
+  Serial.print("$A,Z,");
   Serial.println(acc_z);
 }
 
 void magSend (void)
 {
-  Serial.print("$MX,");
+  Serial.print("$M,X,");
   Serial.println(mag_x);
-  Serial.print("$MY,");
+  Serial.print("$M,Y,");
   Serial.println(mag_y);
-  Serial.print("$MZ,");
+  Serial.print("$M,Z,");
   Serial.println(mag_z);
 }
