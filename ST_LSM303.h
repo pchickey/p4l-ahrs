@@ -4,7 +4,7 @@
 
 // 7 bit I2C slave addresses
 // Accellerometer slave address: SA0 is grounded, so last bit is 0.
-#define ACC_ADDR (int) B0011000
+#define ACC_ADDR ((int) B0011000)
 // Accellerometer registers:
 #define ACC_X_L ((char) B0101000)
 #define ACC_X_H ((char) B0101001)
@@ -28,7 +28,7 @@
 #define ACC_CTL1_1000Hz     ((char) B00011000)
 
 // Magnetometer slave address:
-#define MAG_ADDR (int) B0011110
+#define MAG_ADDR ((int) B0011110)
 
 // CRA Configuration Register A
 #define MAG_CRA ((char) B00000000)
@@ -39,7 +39,7 @@
 #define MAG_CRA_7_5HZ  ((char) B00001100)
 #define MAG_CRA_15HZ   ((char) B00010000)
 #define MAG_CRA_30HZ   ((char) B00010100)
-#define MAG_CRA 75HZ   ((char) B00011000)
+#define MAG_CRA_75HZ   ((char) B00011000)
 // Bias Mode
 #define MAG_CRA_NORMAL  ((char) B00000000)
 #define MAG_CRA_POSBIAS ((char) B00000001)
