@@ -54,26 +54,9 @@ void setup()
   
   magPrintStatus();
 
-  Serial.print("mag x nominal 270 test ");
-  Serial.print(mag_x);
-  Serial.print(": ");
-  Serial.print(int(mag_x_h), BIN);
-  Serial.print(", ");
-  Serial.println(int(mag_x_l), BIN);
-
-  Serial.print("mag y nominal 270 test ");
-  Serial.print(mag_y);
-  Serial.print(": ");
-  Serial.print(int(mag_y_h), BIN);
-  Serial.print(", ");
-  Serial.println(int(mag_y_l), BIN);
-
-  Serial.print("mag z nominal 255 test ");
-  Serial.print(mag_z);  
-  Serial.print(": ");
-  Serial.print(int(mag_z_h), BIN);
-  Serial.print(", ");
-  Serial.println(int(mag_z_l), BIN);
+  Serial.print("mag x nominal 270 test ");Serial.println(mag_x);
+  Serial.print("mag y nominal 270 test ");Serial.println(mag_y);
+  Serial.print("mag z nominal 255 test ");Serial.println(mag_z);  
 
 
   // Trigger a Negative Bias self test
@@ -91,28 +74,9 @@ void setup()
   
   magPrintStatus();
 
-  Serial.print("mag x nominal -270 test ");
-  Serial.print(mag_x);
-  Serial.print(": ");
-  Serial.print(mag_x_h, BIN);
-  Serial.print(", ");
-  Serial.println(mag_x_l, BIN);
-
-  Serial.print("mag y nominal -270 test ");
-  Serial.print(mag_y);
-  Serial.print(": ");
-  Serial.print(mag_y_h, BIN);
-  Serial.print(", ");
-  Serial.println(mag_y_l, BIN);
-  
-  Serial.print("mag z nominal -255 test ");
-  Serial.print(mag_z);
-  Serial.print(": ");
-  Serial.print(mag_z_h, BIN);
-  Serial.print(", ");
-  Serial.println(mag_z_l, BIN);
-  
-
+  Serial.print("mag x nominal -270 test ");Serial.println(mag_x);
+  Serial.print("mag y nominal -270 test ");Serial.println(mag_y);
+  Serial.print("mag z nominal -255 test ");Serial.println(mag_z);
 
   // Reset testing configuration
   i2cWriteWithCheck(MAG_ADDR, MAG_CRA, MAG_CRA_75HZ | MAG_CRA_NORMAL, "mag_cra 75hz");
