@@ -91,14 +91,11 @@ void setup()
 void loop()
 {
   accReadAndConvert();
-  // Serial.print("acc x: ");
-  // Serial.println(acc_x);
+  accSend();
 
   magReadAndConvert();  
-
-  // Serial.print("mag x: ");
-  // Serial.println(mag_x);
-
+  magSend();
+  
   delay(500);
 }
 
@@ -178,3 +175,22 @@ void accReadAndConvert(void)
   acc_z = int((acc_z_h << 8) + acc_z_l) >> 4;
 }
 
+void accSend (void)
+{
+  Serial.print("$AX,");
+  Serial.println(acc_x);
+  Serial.print("$AY,");
+  Serial.println(acc_y);
+  Serial.print("$AZ,");
+  Serial.println(acc_z);
+}
+
+void magSend (void)
+{
+  Serial.print("$MX,");
+  Serial.println(mag_x);
+  Serial.print("$MY,");
+  Serial.println(mag_y);
+  Serial.print("$MZ,");
+  Serial.println(mag_z);
+}
