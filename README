@@ -11,11 +11,15 @@ http://moreproductive.org/autopilot
 Accellerometer and magnetometer readings are written to the serial port with the following NMEA style format:
 $<sensor>,<axis>,<value>\r\n
 using the following symbols:
-$[A|M],[X|Y|Z],[0-9]+\r\n
+$[A|M],[X|Y|Z],[-]?[0-9]+\r\n
 
 For example:
 $A,X,484
-$M,Y,399
+$M,Y,-399
+
+Currently, some debugging information and the results of the sensor self-test is printed in a human-friendly format on boot. I'm working on better error handling code and a way to communicate exceptions over the serial link. 
+
+The code currently reads at about 2Hz, as determined by a delay(500) call. I'll be improving the speed of the code soon by having it check the status registers of the accellerometer and magnetometer, which will be doing conversions at different rates. 
 
 All code by Pat Hickey - pat@moreproductive.org
 This code is released into the public domain, so you can do whatever you like, but if you find it useful or have problems I'd like to hear from you!
