@@ -2,6 +2,9 @@
 // Pat Hickey - pat@moreproductive.org
 // 11 Feb 2010
 
+#ifndef __ST_LSM303_HW_H_
+#define __ST_LSM303_HW_H
+
 // 7 bit I2C slave addresses
 // Accellerometer slave address: SA0 is grounded, so last bit is 0.
 #define ACC_ADDR ((int) B0011000)
@@ -13,11 +16,8 @@
 #define ACC_Z_L ((char) B0101100)
 #define ACC_Z_H ((char) B0101101)
 
-#define ACC_CTL1 ((char) B0100000) // default value is 7
-#define ACC_CTL2 ((char) B0100001) // default 0
-#define ACC_CTL3 ((char) B0100010) // default 0
-#define ACC_CTL4 ((char) B0100011) // default 0
-#define ACC_CTL5 ((char) B0100100) // default 0
+#define ACC_CTL1 ((char) B00100000) // default value is 7
+
 // Bitfields for the ACC_CTL1 register.
 // There are other MODEs for lower power operation.
 #define ACC_CTL1_NORMALMODE ((char) B00100000)
@@ -26,6 +26,44 @@
 #define ACC_CTL1_100HZ      ((char) B00001000)
 #define ACC_CTL1_400HZ      ((char) B00010000)
 #define ACC_CTL1_1000Hz     ((char) B00011000)
+
+#define ACC_CTL2 ((char) B00100001) // default 0
+// Not interested in high-pass filter configuration
+
+#define ACC_CTL3 ((char) B00100010) // default 0
+// Not interested in interrupt control 
+
+#define ACC_CTL4 ((char) B00100011) // default 0
+#define ACC_CTL4_CONT_UPDATE ((char) B00000000)
+// output registers not updated between MSB and LSB reading
+#define ACC_CTL4_BLCK_UPDATE ((char) B10000000)
+// Keep this default (LSB_LOWER)
+#define ACC_CTL4_LSB_LOWER   ((char) B00000000)
+#define ACC_CTL4_MSB_LOWER   ((char) B01000000)
+// Full Scale Selection
+#define ACC_CTL4_SCALE_2G    ((char) B00000000)
+#define ACC_CTL4_SCALE_4G    ((char) B00010000)
+#define ACC_CTL4_SCALE_8G    ((char) B00110000)
+// Self test sign:
+#define ACC_CTL4_SELFTEST_POS ((char) B00000000)
+#define ACC_CTL4_SELFTEST_NEG ((char) B00001000)
+// Self test enable:
+#define ACC_CTL4_SELFTEST_ENABLE ((char) B00000010)
+
+#define ACC_CTL5 ((char) B00100100) // default 0
+// not interested in sleep-to-wake functionality
+
+#define ACC_STAT ((char) B00100111)
+// Overruns- new data overwritten before read
+#define ACC_STAT_XYZOR ((char) B10000000)
+#define ACC_STAT_XOR   ((char) B00010000)
+#define ACC_STAT_YOR   ((char) B00100000)
+#define ACC_STAT_ZOR   ((char) B01000000)
+// Data available- new data since previous read
+#define ACC_STAT_XYZDA ((char) B00001000)
+#define ACC_STAT_XDA   ((char) B00000001)
+#define ACC_STAT_YDA   ((char) B00000010)
+#define ACC_STAT_ZDA   ((char) B00000100) 
 
 // Magnetometer slave address:
 #define MAG_ADDR ((int) B0011110)
@@ -85,3 +123,5 @@
 // cleared when device initiates a write to the output registers (takes 5us).
 #define MAG_SR_RDY  ((char) B0000001)
 
+
+#endif
