@@ -15,3 +15,5 @@ void magSend(void);
 
 bool accNewData(void);
 bool magNewData(void);
+
+#endif
