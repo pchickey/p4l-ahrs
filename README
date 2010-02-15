@@ -1,9 +1,9 @@
-st_LSM303_reader
+p4-ahrs
 ----------------
 
-This is a program for the Arduino which reads LMS303DLH 3-axis magnetometer and accellerometer, made by ST Micro.
+This is a program for the Arduino which reads LMS303DLH 3-axis magnetometer and accellerometer, made by ST Micro. I'll be adding support for an Invensense three axis gyro soon.
 
-I wrote this code as part of the Rutgers Autonomous Aircraft Team. A big thank you to ST Micro for donating eval boards to our project.
+I wrote this code as part of the Rutgers Autonomous Aircraft Team. A big thank you to ST Micro and Invensense for donating eval boards to our project.
 
 This sensor and code is used in the Paparazzi for Linux project:
 http://moreproductive.org/autopilot
