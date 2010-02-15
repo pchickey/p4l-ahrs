@@ -77,10 +77,10 @@ void setup()
   // Trigger on Data Ready
   i2cWriteWithCheck(GYRO_ADDR, GYRO_INT_CFG, 
     GYRO_INT_MODE_LATCH | GYRO_INT_CLEAR_ANY | GYRO_INT_CFG_DATA_RDY,
-     "gyro interrupt configuration"};
+     "gyro interrupt configuration");
 
 
-
+}
 void loop()
 {
 
