@@ -9,7 +9,8 @@
 #include "i2c_registers.h"
 #include "ST_LSM303_hw.h"
 #include "ST_LSM303_i2c.h"
-
+#include "ITG_3200_hw.h"
+#include "ITG_3200_i2c.h"
 
 int acc_x, acc_y, acc_z;
 int mag_x, mag_y, mag_z;
@@ -57,8 +58,26 @@ void setup()
   i2cWriteWithCheck(MAG_ADDR, MAG_MR, MAG_MR_CONTINUOUS, "mag mr continuous");
   Serial.println("Exiting Magnetometer Self Test");
 
-
-}
+  // Configure Rate Gyro
+  // ------------------------------------------
+  // Sample Rate Divider: 1khz / (divider + 1). 
+  // 50hz means divider should be 19
+  i2cWriteWithCheck(GYRO_ADDR, GYRO_SMPLRT_DIV, 19, "gyro sample rate divider 19");
+  
+  // Internal Low Pass filter: 
+  // 1Khz sample rate, 98Hz bandwidth
+  // Full Scale: +-2000deg/sec
+  i2cWriteWithCheck(GYRO_ADDR, GYRO_DLPF_FS, GYRO_FS_2000 | GYRO_DLPF_98, "gyro dlpf 98 fs 2000");
+  
+  // Interrupt Configuration:
+  // Active High (default)
+  // Push-Pull (default)
+  // Latch mode
+  // Clear on Any register read
+  // Trigger on Data Ready
+  i2cWriteWithCheck(GYRO_ADDR, GYRO_INT_CFG, 
+    GYRO_INT_MODE_LATCH | GYRO_INT_CLEAR_ANY | GYRO_INT_CFG_DATA_RDY,
+     "gyro interrupt configuration"};
 
 
 
