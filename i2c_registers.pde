@@ -1,6 +1,6 @@
 
 #include <Wire.h>
-#include <Serial.h>
+
 
 char i2cReadRegister(int i2c_device, char i2c_register)
 {
