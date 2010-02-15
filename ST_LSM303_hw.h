@@ -1,4 +1,4 @@
-// ST_LSM303 I2C Register Macros
+// ST Micro LSM303 I2C Register Macros
 // Pat Hickey - pat@moreproductive.org
 // 11 Feb 2010
 

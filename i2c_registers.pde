@@ -11,7 +11,7 @@ char i2cReadRegister(int i2c_device, char i2c_register)
   return Wire.receive();  
 }
 
-void i2cReadRegisterSequential(int i2c_device, char_i2c_register, int len, char * buf)
+void i2cReadRegisterSequential(int i2c_device, char i2c_register, int len, char * buf)
 {
   Wire.beginTransmission(i2c_device);
   Wire.send(i2c_register);
