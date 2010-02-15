@@ -1,5 +1,7 @@
-// Accellerometer and Magnetometer Reader
-// Communicates with an ST Micro LMSM303DLH using the Wire library
+// Magnetometer, Accellerometer, and Rate Gyro (MARG) interface firmware
+// Supports ST Micro LMSM303DLH 3-axis Accellerometer and Magnetometer,
+// and Invensense ITG-3200 3-axis rate gyro.
+
 // Pat Hickey - pat@moreproductive.org
 // 11 Febuary 2010
 
