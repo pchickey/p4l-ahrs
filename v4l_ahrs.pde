@@ -44,50 +44,9 @@ void setup()
 
   // Perform Magnetometer Self Test
   // ---------------------------------------
-  Serial.println("Entering Magnetometer Self Test");
-
-  magReadAndConvert(); // clear any LOCK state
-
-  // Trigger a Positive Bias self test
-  Serial.println("triggering magnetic self test, positive bias");
-  i2cWriteRegister(MAG_ADDR, MAG_CRA, MAG_CRA_75HZ | MAG_CRA_POSBIAS);
-  i2cWriteWithCheck(MAG_ADDR, MAG_MR, MAG_MR_SINGLE, "mag mr single");
+  magSelfTest();
   delay(100);
-  magReadAndConvert();
-
-  Serial.print("mag x nominal 270 test ");
-  Serial.println(mag_x);
-  Serial.print("mag y nominal 270 test ");
-  Serial.println(mag_y);
-  Serial.print("mag z nominal 255 test ");
-  Serial.println(mag_z);  
-  float mag_deviation = sqrt( (mag_x - 270)*(mag_x - 270) + (mag_y - 270)*(mag_y - 270) +
-    (mag_z - 255)*(mag_z - 255) );
-
-  Serial.print("positive bias self test deviation magnitude ");
-  Serial.println(mag_deviation);  
-
-  // Trigger a Negative Bias self test
-  Serial.println("triggering magnetic self test, negative bias");
-  i2cWriteRegister(MAG_ADDR, MAG_CRA, MAG_CRA_75HZ | MAG_CRA_NEGBIAS);
-  i2cWriteWithCheck(MAG_ADDR, MAG_MR, MAG_MR_SINGLE, "mag mr single");
-  delay(100);
-  magReadAndConvert();
-
-  //magPrintStatus();
-
-  Serial.print("mag x nominal -270 test ");
-  Serial.println(mag_x);
-  Serial.print("mag y nominal -270 test ");
-  Serial.println(mag_y);
-  Serial.print("mag z nominal -255 test ");
-  Serial.println(mag_z);
-  mag_deviation = sqrt( (mag_x + 270)*(mag_x + 270) + (mag_y + 270)*(mag_y + 270) +
-    (mag_z + 255)*(mag_z + 255) );
-  Serial.print("negative bias self test deviation magnitude ");
-  Serial.println(mag_deviation);  
-  // Done with Magnetometer self test
-  // --------------------------------
+  magSelfTest();
 
   // Reset testing configuration
   i2cWriteWithCheck(MAG_ADDR, MAG_CRA, MAG_CRA_75HZ | MAG_CRA_NORMAL, "mag_cra 75hz");
@@ -103,6 +62,7 @@ void setup()
 
 void loop()
 {
+
   if(accNewData())
   {
     accReadAndConvert();

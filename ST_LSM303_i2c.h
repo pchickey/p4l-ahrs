@@ -10,6 +10,8 @@ void magPrintStatus(void);
 void magReadAndConvert(void);
 void accReadAndConvert(void);
 
+bool magSelfTest(void);
+
 void accSend(void);
 void magSend(void);
 

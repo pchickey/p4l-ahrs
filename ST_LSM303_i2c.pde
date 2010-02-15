@@ -6,6 +6,54 @@
 unsigned char acc_x_l, acc_x_h, acc_y_l, acc_y_h,acc_z_l, acc_z_h;
 unsigned char mag_x_l, mag_x_h, mag_y_l, mag_y_h, mag_z_l, mag_z_h;
 
+bool magSelfTest(void)
+{
+ Serial.println("Entering Magnetometer Self Test");
+
+  magReadAndConvert(); // clear any LOCK state
+
+  // Trigger a Positive Bias self test
+  Serial.println("triggering magnetic self test, positive bias");
+  i2cWriteRegister(MAG_ADDR, MAG_CRA, MAG_CRA_75HZ | MAG_CRA_POSBIAS);
+  i2cWriteWithCheck(MAG_ADDR, MAG_MR, MAG_MR_SINGLE, "mag mr single");
+  delay(100);
+  magReadAndConvert();
+
+  Serial.print("mag x nominal 270 test ");
+  Serial.println(mag_x);
+  Serial.print("mag y nominal 270 test ");
+  Serial.println(mag_y);
+  Serial.print("mag z nominal 255 test ");
+  Serial.println(mag_z);  
+  float mag_deviation = sqrt( (mag_x - 270)*(mag_x - 270) + (mag_y - 270)*(mag_y - 270) +
+    (mag_z - 255)*(mag_z - 255) );
+
+  Serial.print("positive bias self test deviation magnitude ");
+  Serial.println(mag_deviation);  
+
+  // Trigger a Negative Bias self test
+  Serial.println("triggering magnetic self test, negative bias");
+  i2cWriteRegister(MAG_ADDR, MAG_CRA, MAG_CRA_75HZ | MAG_CRA_NEGBIAS);
+  i2cWriteWithCheck(MAG_ADDR, MAG_MR, MAG_MR_SINGLE, "mag mr single");
+  delay(100);
+  magReadAndConvert();
+
+  //magPrintStatus();
+
+  Serial.print("mag x nominal -270 test ");
+  Serial.println(mag_x);
+  Serial.print("mag y nominal -270 test ");
+  Serial.println(mag_y);
+  Serial.print("mag z nominal -255 test ");
+  Serial.println(mag_z);
+  mag_deviation = sqrt( (mag_x + 270)*(mag_x + 270) + (mag_y + 270)*(mag_y + 270) +
+    (mag_z + 255)*(mag_z + 255) );
+  Serial.print("negative bias self test deviation magnitude ");
+  Serial.println(mag_deviation);  
+  
+  return true;
+}
+
 
 void magPrintStatus(void)
 {
