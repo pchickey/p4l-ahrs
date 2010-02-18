@@ -5,7 +5,14 @@
 #ifndef __ITG_3200_I2C_H
 #define __ITG_3200_I2C_H
 
-// placeholder for now
+extern int gyro_pin;
+extern int gyro_x, gyro_y, gyro_z;
 
+void gyroReadAndConvert(void);
+
+void gyroSend(void);
+void gyroSendDebug(void);
+
+bool gyroNewData(void);
 
 #endif
