@@ -12,14 +12,25 @@
 #include "ITG_3200_hw.h"
 #include "ITG_3200_i2c.h"
 
+int gyro_pin = 10;
+int mag_pin = 11;
+int acc_pin = 12; // NOT SOLDERED YET
+
 int acc_x, acc_y, acc_z;
 int mag_x, mag_y, mag_z;
+int gyro_x, gyro_y, gyro_z;
 
 
 void setup()
 {
+  // Serial busses
   Serial.begin(115200); // to computer
   Wire.begin(); // master device on i2c bus
+  
+  // Status pins
+  pinMode(gyro_pin, INPUT);
+  pinMode(mag_pin, INPUT);
+  pinMode(acc_pin, INPUT);
 
   // Configure Accellerometer
   //---------------------------------
@@ -79,11 +90,14 @@ void setup()
     GYRO_INT_MODE_LATCH | GYRO_INT_CLEAR_ANY | GYRO_INT_CFG_DATA_RDY,
      "gyro interrupt configuration");
 
-
+  // Power Managment:
+  // Get clock from X axis gyro
+  i2cWriteWithCheck(GYRO_ADDR, GYRO_PWR, GYRO_PWR_CLK_GX_REF, "gyro clock configuration");
+  
 }
 void loop()
 {
-
+  /*
   if(accNewData())
   {
     accReadAndConvert();
@@ -94,6 +108,14 @@ void loop()
     magReadAndConvert();  
     //    magSend();
   }
+  */  
+  gyroNewData();
+  
+  gyroReadAndConvert();
+  gyroSendDebug();
+  
+  Serial.println("loop done");
+  delay(500);
 
 }
 
