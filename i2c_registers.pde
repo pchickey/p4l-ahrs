@@ -15,6 +15,7 @@ void i2cReadRegisterSequential(int i2c_device, char i2c_register, int len, char 
 {
   Wire.beginTransmission(i2c_device);
   Wire.send(i2c_register);
+  Wire.endTransmission();
   Wire.requestFrom(i2c_device, len);
   int ii;
   for(ii = 0; ii < len; ii++)
