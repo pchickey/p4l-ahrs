@@ -97,25 +97,26 @@ void setup()
 }
 void loop()
 {
-  /*
+  
   if(accNewData())
   {
     accReadAndConvert();
-    //    accSend();
+        accSend();
   }
   if(magNewData())
   {
     magReadAndConvert();  
-    //    magSend();
+        magSend();
   }
-  */  
-  gyroNewData();
-  
-  gyroReadAndConvert();
-  gyroSendDebug();
-  
-  Serial.println("loop done");
-  delay(500);
+    
+  //if(gyroNewData())
+  //{
+    gyroReadAndConvert();
+    gyroSend();
+    //gyroSendDebug();
+  //}
+  //Serial.println("loop done");
+  //delay(500);
 
 }
 
